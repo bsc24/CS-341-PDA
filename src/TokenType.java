@@ -1,5 +1,7 @@
 
 
+
+
 public enum TokenType {
 	// Integer constant and variables
 	ICONST,

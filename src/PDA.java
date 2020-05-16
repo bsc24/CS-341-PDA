@@ -1,18 +1,28 @@
+
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
 /* 
  * Author: Brandon S. Chin
- * Some components of this project were taken from or inspired by a previous project of mine from CS 280
  * 
  */
 
 
-public class Main {
+public class PDA {
 
 	public static void main(String[] args) {
 
 		Scanner input = new Scanner(System.in);
+		boolean verbose;
+		
+		if (args.length >= 1 && args[0].equals("-debug")) {
+			verbose = true;	
+		}
+		else {
+			verbose = false;
+		}
+		
 		
 		while (true) {
 			System.out.print("Enter a string to compute or ~ to end: ");
@@ -33,11 +43,12 @@ public class Main {
 			ParseTree pdaParse = ParseTree.createParseTree(computeString);
 			String startingParts = "";
 			String lastString = "";
+			boolean error = false;
 			LinkedList<ParseTree> parseStack = new LinkedList<ParseTree>();
 			parseStack.push(pdaParse);
 			
 			while (!parseStack.isEmpty()) {
-				boolean error = false;
+				error = false;
 				String printingString = startingParts;
 				for (ParseTree value: parseStack) {
 					printingString += value.getToken();
@@ -60,7 +71,7 @@ public class Main {
 				
 				startingParts += nextTree.getToken().getLexeme();
 				
-				if (!printingString.equals(lastString)) {
+				if (!printingString.equals(lastString) && verbose) {
 					System.out.println(printingString);
 				}
 				
@@ -71,8 +82,14 @@ public class Main {
 				lastString = printingString;
 			}
 			
+			System.out.print("DONE: ");
 			
-			System.out.println("DONE");
+			if (error) {
+				System.out.println("STRING NOT ACCEPTED\n");
+			}
+			else {
+				System.out.println("STRING ACCEPTED\n");
+			}
 		}
 		
 	}

@@ -1,5 +1,7 @@
 
 
+
+
 public class LexicalAnalyzer {
 	public static Token getNextToken(String input, int inputIndex) {
 		

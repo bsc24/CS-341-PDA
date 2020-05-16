@@ -1,3 +1,5 @@
+
+
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -132,7 +134,7 @@ public class ParseTree {
 				break;
 				
 			case ERR:
-				System.out.println("Error occurred");
+				//System.out.println("Error occurred");
 				break;
 				
 			default:
